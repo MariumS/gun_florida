@@ -16,16 +16,6 @@ var years = [
   '2018',
 ];
 
-map.addSource('guns_by_zip', {
-  type: 'geojson',
-  data: './data/simple_guns.geojson',
-});
-
-
-map.addSource('mass_shootings', {
-  type: 'geojson',
-  data: './data/mass_shootings.geojson',
-});
 
 function filterBy(year) {
 
