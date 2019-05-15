@@ -90,8 +90,43 @@ map.on('load', function() {
 document.getElementById('slider').addEventListener('input', function(e) {
 var year = parseInt(e.target.value, 10);
 filterBy(year);
+});
+
+
+map.on('mousemove', function (e) {
+    // query for the features under the mouse, but only in the lots layer
+    var features = map.queryRenderedFeatures(e.point, {
+        layers: ['guns_cloro']
+    })
+
+    map.on('mousemove', function (e) {
+        // query for the features under the mouse, but only in the lots layer
+        var features = map.queryRenderedFeatures(e.point, {
+            layers: ['mass_shootings-circles']
+        })
+
+    // Change the cursor to a pointer when the mouse is over the guns_ layer.
+    map.on('mouseenter', 'guns_cloro', function(e) {
+      map.getCanvas().style.cursor = 'pointer';
+    });
+
+    // Change it back to a pointer when it leaves.
+    map.on('mouseleave', 'guns_cloro', function(e) {
+      map.getCanvas().style.cursor = 'pointer';
+    });
+
+    // Change the cursor to a pointer when the mouse is over the guns_ layer.
+    map.on('mouseenter', 'mass_shootings-circles', function(e) {
+      map.getCanvas().style.cursor = 'pointer';
+    });
+
+    // Change it back to a pointer when it leaves.
+    map.on('mouseleave', 'mass_shootings-circles', function(e) {
+      map.getCanvas().style.cursor = 'pointer';
+    });
 
   map.on('click', 'mass_shootings-circles', function(e) {
+
     new mapboxgl.Popup()
       .setLngLat(e.lngLat)
       .setHTML(`${e.n_killed} people were killed at ${e.address} on ${e.date}`)
@@ -105,15 +140,7 @@ filterBy(year);
       .addTo(map);
   });
 
-  // Change the cursor to a pointer when the mouse is over the guns_ layer.
-  map.on('mouseenter', 'guns_cloro', function(e) {
-    map.getCanvas().style.cursor = 'pointer';
-  });
-
-  // Change it back to a pointer when it leaves.
-  map.on('mouseleave', 'guns_cloro', function(e) {
-    map.getCanvas().style.cursor = 'pointer';
-  });
+});
 
 });
 });
