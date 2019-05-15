@@ -24,9 +24,8 @@ function filterBy(year) {
 
   // Set the label to the month
   document.getElementById('year').textContent = years[year];
+
 }
-
-
 
 map.on('load', function() {
 
@@ -42,84 +41,94 @@ map.on('load', function() {
   });
 
 
-  mass_shootings.features = mass_shootings.features.map(function(d) {
+  mass_shootings.features = mass_shootings.features.map(function(e) {
     e.properties.year = d;
     return d;
   });
 
-
-  map.addLayer({
-    id: 'guns_cloro',
-    type: 'fill',
-    source: 'guns_by_zip',
-    paint: {
-      'fill-color': {
-        property: 'n_killed_t',
-        stops: [
-          [0, '#f7cdcd'],
-          [5, '#ee9f9f'],
-          [10, '#ea8888'],
-          [20, '#e15e5e'],
-          [30, '#dd4a4a'],
-          [40, '#cc0000'],
-        ]
-      }
-    }
+  guns_by_zip.features = guns_by_zip.features.map(function(e) {
+    d.properties.year = d;
+    return d;
   });
 
-  map.addLayer({
-'id': 'mass_shootings-circles',
-'type': 'circle',
-'source': 'mass_shootings',
-'paint': {
-'circle-color': [
-'interpolate',
-['linear'],
-['get', 'n_killed'],
-1, '#FCA107',
-30, '#7F3121'
-],
-'circle-opacity': 0.75,
-'circle-radius': [
-'interpolate',
-['linear'],
-['get', 'n_killed'],
-6, 20,
-8, 40
-]
-}
-});
-});
+  document.getElementById('slider').addEventListener('input', function(e) {
+    var year = parseInt(e.year);
+    filterBy(year);
 
-map.on('click', 'mass_shootings-circles', function(e) {
-  new mapboxgl.Popup()
-    .setLngLat(e.lngLat)
-    .setHTML(`${e.n_killed} people were killed at ${e.address} on ${e.date}`)
-    .addTo(map);
-});
+    map.addLayer({
+      id: 'guns_cloro',
+      type: 'fill',
+      source: 'guns_by_zip',
+      paint: {
+        'fill-color': {
+          property: 'n_killed_t',
+          stops: [
+            [0, '#f7cdcd'],
+            [5, '#ee9f9f'],
+            [10, '#ea8888'],
+            [20, '#e15e5e'],
+            [30, '#dd4a4a'],
+            [40, '#cc0000'],
+          ]
+        }
+      }
+    });
 
-map.on('click', 'guns_cloro', function(e) {
-  new mapboxgl.Popup()
-    .setLngLat(e.lngLat)
-    .setHTML(`${e.n_killed_t} people were killed in ${e.ZCTA5CE10} in ${e.year}`)
-    .addTo(map);
-});
+    map.addLayer({
+      'id': 'mass_shootings-circles',
+      'type': 'circle',
+      'source': 'mass_shootings',
+      'paint': {
+        'circle-color': [
+          'interpolate',
+          ['linear'],
+          ['get', 'n_killed'],
+          1, '#FCA107',
+          30, '#7F3121'
+        ],
+        'circle-opacity': 0.75,
+        'circle-radius': [
+          'interpolate',
+          ['linear'],
+          ['get', 'n_killed'],
+          6, 20,
+          8, 40
+        ]
+      }
+    });
+  });
 
-// Change the cursor to a pointer when the mouse is over the guns_ layer.
-map.on('mouseenter', 'guns_cloro', function() {
-  map.getCanvas().style.cursor = 'pointer';
-});
+  map.on('click', 'mass_shootings-circles', function(e) {
+    new mapboxgl.Popup()
+      .setLngLat(e.lngLat)
+      .setHTML(`${e.n_killed} people were killed at ${e.address} on ${e.date}`)
+      .addTo(map);
+  });
 
-// Change it back to a pointer when it leaves.
-map.on('mouseleave', 'guns_cloro', function() {
-  map.getCanvas().style.cursor = 'pointer';
-});
+  map.on('click', 'guns_cloro', function(e) {
+    new mapboxgl.Popup()
+      .setLngLat(e.lngLat)
+      .setHTML(`${e.n_killed_t} people were killed in ${e.ZCTA5CE10} in ${e.year}`)
+      .addTo(map);
+  });
 
-// Set filter to first month of the year
-// 0 = January
-filterBy(2013);
+  // Change the cursor to a pointer when the mouse is over the guns_ layer.
+  map.on('mouseenter', 'guns_cloro', function(e) {
+    map.getCanvas().style.cursor = 'pointer';
+  });
+
+  // Change it back to a pointer when it leaves.
+  map.on('mouseleave', 'guns_cloro', function(e) {
+    map.getCanvas().style.cursor = 'pointer';
+  });
+
+  // Set filter to first year
+  filterBy(2013);
+
 
 document.getElementById('slider').addEventListener('input', function(e) {
-  var year = parseInt(e.target.value, 10);
-  filterBy(year);
+var year = parseInt(e.target.value, 10);
+filterBy(year);
+
 });
+  });
