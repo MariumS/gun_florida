@@ -9,60 +9,47 @@
   <meta name="description" content="A Map of Gun Deaths in NY State Since 2013">
   <meta name="author" content="Marium Sultan">
 
-<link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/cover/">
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <!-- Mapbox CSS -->
 <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css" rel="stylesheet" />
 <!-- Custom CSS -->
 <link rel="stylesheet" href="css/styles.css?v=1.0">
-</head>
 
-
-
-</head>
 <body class="text-center">
   <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-<header class="masthead mb-auto">
-  <div class="inner">
-    <h3 class="masthead-brand">Cover</h3>
-    <nav class="nav nav-masthead justify-content-center">
-      <a class="nav-link active" href="https://getbootstrap.com/docs/4.3/examples/cover/#">Home</a>
-      <a class="nav-link" href="https://getbootstrap.com/docs/4.3/examples/cover/#">Features</a>
-      <a class="nav-link" href="https://getbootstrap.com/docs/4.3/examples/cover/#">Contact</a>
-    </nav>
-  </div>
-</header>
+<body>
+  <div id="mapContainer">
+    <div id="sidebar">
+      <div class="info-box">
+        <h3>Florida Gun Deaths Map</h3>
+        <span id="address">Move the mouse over a zipcode for the total deaths that year</span><br/>
+        <span id="landuse"></span>
+      </div>
+      <div class="info-box">
+        <h3>Slide to Change Year</h3>
+        <label id='year'></label>
+      <input id='slider' type='range' min='2014' max='2018' step='1' value='2014' />
 
-<div>
+        <!-- These buttons use data attributes, which we can easily pull using jquery -->
 
-  <h1 class="cover-heading">Cover your page.</h1>
-  <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
-  <p class="lead">Click a ZipCode to see the amount of gun deaths, and slide between years</p>
-</div>
+        <hr/>
+        <button class="button">See Changes Over Time</button>
+      </div>
+      <div class="info-box legend">
 
+        <h3>Gun Deaths Total in the Chosen Year</h3>
+        <div><span style='background-color: #f7cdcd'></span>0</div>
+        <div><span style='background-color: #ee9f9f'></span>5</div>
+        <div><span style='background-color: #ea8888'></span>10</div>
+        <div><span style='background-color: #e15e5e'></span>20</div>
+        <div><span style='background-color: #dd4a4a'></span>30</div>
+        <div><span style='background-color: #cc0000'></span>40+</div>
 
-<div> <class = text-center id="mapContainer"></div>
-
-<div id='legend'>
-
-    <h4>Gun Deaths Total Since 2013</h4>
-    <div><span style='background-color: #f7cdcd'></span>0</div>
-    <div><span style='background-color: #ee9f9f'></span>5</div>
-    <div><span style='background-color: #ea8888'></span>10</div>
-    <div><span style='background-color: #e15e5e'></span>20</div>
-    <div><span style='background-color: #dd4a4a'></span>30</div>
-    <div><span style='background-color: #cc0000'></span>40</div>
-
-  </div>
+      </div>
 
 
-<footer class="mastfoot mt-auto">
-  <div class="inner">
-    <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
-  </div>
-</footer>
-</div>
+    </div>
 
 
   <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>

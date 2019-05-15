@@ -8,6 +8,26 @@ var map = new mapboxgl.Map({
   zoom: 6,
 });
 
+var years = [
+  '2014',
+  '2015',
+  '2016',
+  '2017',
+  '2018',
+];
+
+function filterBy(year) {
+
+  var filters = ['==', 'year', year];
+  map.setFilter('guns_cloro', filters);
+  map.setFilter('mass_shootings', filters);
+
+  // Set the label to the month
+  document.getElementById('year').textContent = years[year];
+}
+
+
+
 map.on('load', function() {
 
   map.addSource('guns_by_zip', {
@@ -20,6 +40,13 @@ map.on('load', function() {
     type: 'geojson',
     data: './data/mass_shootings.geojson',
   });
+
+
+  mass_shootings.features = mass_shootings.features.map(function(d) {
+    e.properties.year = d;
+    return d;
+  });
+
 
   map.addLayer({
     id: 'guns_cloro',
@@ -45,7 +72,7 @@ map.on('load', function() {
 map.on('click', 'guns_cloro', function(e) {
   new mapboxgl.Popup()
     .setLngLat(e.lngLat)
-    .setText(`${e.n_killed_t} people were killed in ${e.ZCTA5CE10} in ${e.year}`)
+    .setHTML(`${e.n_killed_t} people were killed in ${e.ZCTA5CE10} in ${e.year}`)
     .addTo(map);
 });
 
@@ -57,4 +84,13 @@ map.on('mouseenter', 'guns_cloro', function() {
 // Change it back to a pointer when it leaves.
 map.on('mouseleave', 'guns_cloro', function() {
   map.getCanvas().style.cursor = 'pointer';
+});
+
+// Set filter to first month of the year
+// 0 = January
+filterBy(2013);
+
+document.getElementById('slider').addEventListener('input', function(e) {
+  var year = parseInt(e.target.value, 10);
+  filterBy(year);
 });

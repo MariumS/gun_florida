@@ -1,37 +1,85 @@
 
 
+
+html, body {
+  height: 100%;
+  width: 100%;
+  margin:0
+}
+
 #mapContainer {
-  display: inline-block
-  width: 1000px;
-  height: 1000px;
+  height: 100%;
+  width: 100%;
+  background: lightgray;
+  margin: 0 auto;
 }
 
-.figure {
-  display: inline-block
+#sidebar {
+  width: 300px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 10;
+  padding: 15px;
 }
 
-.figure-img {
-  margin-bottom: .5rem;
-  line-height: 1
+.info-box {
+  top: 25px;
+  left: 25px;
+  z-index: 10;
+  background-color: #c3c3c3;
+  padding: 15px;
+  border-radius: 11px;
+  box-shadow: 1px 1px 7px #525252;
+  margin-bottom:15px
 }
 
-body {
-  background: grey;
+
+.info-box2 {
+  top: 25px;
+  left: 25px;
+  z-index: 10;
+  background-color: blue;
+  padding: 15px;
+  border-radius: 11px;
+  box-shadow: 1px 1px 7px #525252;
+  margin-bottom:15px
 }
+
+h3 {
+  margin: 0 0 15px 0;
+  font-size: 1rem;
+}
+
+button {
+  padding: 10px;
+  font-weight: 500;
+  border-radius: 5px;
+}
+
+.legend-color-box {
+  height: 15px;
+  width: 15px;
+  float: left;
+  margin-right: 10px;
+}
+
 
 .legend {
-  background-color: #66ffcc;
-  border-radius: 3px;
-  bottom: 100px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.10);
-  font: 12px/10px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-  padding: 10px;
-  position: fixed;
-  right: 30px;
-  width: 100px;
-  height: 100px;
+  top: 30px;
+  font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  float: left;
+  margin-right: 10px;
+  background-color: #c3c3c3;
+  padding: 15px;
+  border-radius: 11px;
+  box-shadow: 1px 1px 7px #525252;
+  margin-bottom:15px
+}
 
-  z-index: 1;
+.legend h4 {
+  margin: 0 0 10px;
 }
 
 .legend div span {
@@ -40,7 +88,4 @@ body {
   height: 10px;
   margin-right: 5px;
   width: 10px;
-}
-.cover {
-  padding: 0 1.5rem;
 }
