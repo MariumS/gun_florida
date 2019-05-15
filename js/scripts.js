@@ -77,12 +77,11 @@ map.on('load', function() {
           'interpolate',
           ['linear'],
           ['get', 'n_killed'],
-          6, 20,
-          8, 40
+          6, 2,
+          30, 4,
         ]
       }
     });
-  });
 
   // Set filter to first year
   filterBy(2014);
@@ -116,4 +115,5 @@ filterBy(year);
     map.getCanvas().style.cursor = 'pointer';
   });
 
+});
 });
