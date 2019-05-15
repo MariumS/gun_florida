@@ -66,8 +66,37 @@ map.on('load', function() {
       }
     }
   });
+
+  map.addLayer({
+'id': 'mass_shootings-circles',
+'type': 'circle',
+'source': 'mass_shootings',
+'paint': {
+'circle-color': [
+'interpolate',
+['linear'],
+['get', 'n_killed'],
+1, '#FCA107',
+30, '#7F3121'
+],
+'circle-opacity': 0.75,
+'circle-radius': [
+'interpolate',
+['linear'],
+['get', 'n_killed'],
+6, 20,
+8, 40
+]
+}
+});
 });
 
+map.on('click', 'mass_shootings-circles', function(e) {
+  new mapboxgl.Popup()
+    .setLngLat(e.lngLat)
+    .setHTML(`${e.n_killed} people were killed at ${e.address} on ${e.date}`)
+    .addTo(map);
+});
 
 map.on('click', 'guns_cloro', function(e) {
   new mapboxgl.Popup()
