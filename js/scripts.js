@@ -91,7 +91,7 @@ document.getElementById('slider').addEventListener('input', function(e) {
 var year = parseInt(e.target.value, 10);
 filterBy(year);
 });
-
+//testing the old way//
 map.on('click', 'guns_cloro', function (e) {
 new mapboxgl.Popup()
 .setLngLat(e.lngLat)
