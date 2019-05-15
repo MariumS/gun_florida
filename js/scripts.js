@@ -21,7 +21,7 @@ var map = new mapboxgl.Map({
 
 map.addSource('guns_by_zip', {
   type: 'geojson',
-  data: './data/cl.geojson',
+  data: './data/simple_guns.geojson',
 });
 
 
@@ -30,6 +30,7 @@ map.addSource('mass_shootings', {
   data: './data/mass_shootings.geojson',
 });
 
+//cloropleth
 map.on('load', function(){
       map.addLayer({
         id: 'guns_fill_color',
@@ -49,12 +50,13 @@ map.on('load', function(){
         },
         layout: {}
           });
+          //marker for mass shootings
         new mapboxgl.Marker({
           color: 'blue',
         })
           .setLngLat([mass_shootings.longitude, mass_shootings.latitude])
           .setPopup(new mapboxgl.Popup({ offset: 10 })
-          .setText(`In ${mass_shootings.address} year ${mass_shootings.year}`))
+          .setText(`${mass_shootings.address} year ${mass_shootings.year}`))
           .addTo(map);
 
       });
