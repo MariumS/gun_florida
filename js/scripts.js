@@ -48,6 +48,7 @@ map.on('load', function() {
       paint: {
         'fill-color': {
           property: 'n_killed_t',
+          opacity: 0.75,
           stops: [
             [0, '#f7cdcd'],
             [5, '#ee9f9f'],
@@ -77,7 +78,7 @@ map.on('load', function() {
           'interpolate',
           ['linear'],
           ['get', 'n_killed'],
-          6, 2,
+          6, 4,
           30, 4,
         ]
       }
