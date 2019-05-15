@@ -1,6 +1,3 @@
-
-
-
 mapboxgl.accessToken = 'pk.eyJ1IjoibWFyemlwYW45NCIsImEiOiJjanVrOTdwaDQxdG42NDRwNGFmbzY5dWdtIn0.4lVQxPc89QYzHas2IIWmew';
 
 var slider = document.getElementById("myRange");
@@ -9,7 +6,7 @@ var output = document.getElementById("demo");
 
 // Update the current slider value (each time you drag the slider handle)
 //slider.oninput = function() {
-  //output.innerHTML = this.value;
+//output.innerHTML = this.value;
 //};
 
 var map = new mapboxgl.Map({
@@ -19,44 +16,67 @@ var map = new mapboxgl.Map({
   zoom: 6,
 });
 
-map.addSource('guns_by_zip', {
-  type: 'geojson',
-  data: './data/simple_guns.geojson',
+map.on('load', function() {
+
+  map.addSource('guns_by_zip', {
+    type: 'geojson',
+    data: './data/simple_guns.geojson',
+  });
+
+
+  map.addSource('mass_shootings', {
+    type: 'geojson',
+    data: './data/mass_shootings.geojson',
+  });
+
+  map.addLayer({
+    id: 'guns_by_zip',
+    type: 'fill',
+    source: 'guns',
+    paint: {
+      'fill-color': {
+        property: 'n_killed',
+        stops: [
+          [0, '#f7cdcd'],
+          [5, '#ee9f9f'],
+          [10, '#ea8888'],
+          [20, '#e15e5e'],
+          [30, '#dd4a4a'],
+          [40, '#cc0000'],
+        ]
+      }
+    }
+  });
 });
 
 
-map.addSource('mass_shootings', {
-  type: 'geojson',
-  data: './data/mass_shootings.geojson',
+
+map.on('click', 'guns_by_zip', function(e) {
+  new mapboxgl.Popup()
+    .setLngLat(e.lngLat)
+    .setHTML(e.features[0].properties.n_killed_t)
+    .addTo(map);
 });
 
-//cloropleth
-map.on('load', function(){
-      map.addLayer({
-        id: 'guns_fill_color',
-        type: 'fill',
-        source: 'guns_by_zip',
-        paint: {
-          'fill-color': [
-            // use a curve (http://bl.ocks.org/anandthakker/raw/6d0269825a7e0381cdcde13f84a0b6b0/#types-expression-curve)
-            // of type "step," which will step through each break instead of interpolating between them.
-            // Then, get the density value and use a `number` expression to return it as a number instead of a string.
-            // Each step is then a pair [{color code}, {max value for break}]
-            // Finally, add a default color code for any features that fall outside of the steps you've defined.
-            "curve",
-              ["step"], ["number", ["get", "n_killed_t"], 1], "#FFEDA0", 10, "#FED976", 20, "#FEB24C", 50, "#FD8D3C", 100, "#FC4E2A", 200, "#E31A1C", 500, "#BD0026", 2000, "#000000"
-          ],
-          'fill-opacity': 0.6
-        },
-        layout: {}
-          });
-          //marker for mass shootings
-        new mapboxgl.Marker({
-          color: 'blue',
-        })
-          .setLngLat([mass_shootings.longitude, mass_shootings.latitude])
-          .setPopup(new mapboxgl.Popup({ offset: 10 })
-          .setText(`${mass_shootings.address} year ${mass_shootings.year}`))
-          .addTo(map);
+// Change the cursor to a pointer when the mouse is over the guns_ layer.
+map.on('mouseenter', 'guns_by_zip', function() {
+  map.getCanvas().style.cursor = 'pointer';
+});
 
-      });
+// Change it back to a pointer when it leaves.
+map.on('mouseleave', 'guns_by_zip', function() {
+  map.getCanvas().style.cursor = 'pointer';
+});
+
+new mapboxgl.Marker({
+    color: 'blue',
+  })
+  .setLngLat([mass_shootings.longitude, mass_shootings.latitude])
+  .setPopup(new mapboxgl.Popup({
+      offset: 10
+    })
+    .setText(`${mass_shootings.address} year ${mass_shootings.year}`))
+  .addTo(map);
+
+  });
+});
