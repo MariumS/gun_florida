@@ -20,7 +20,7 @@ var years = [
 function filterBy(year) {
 
   var filters = ['==', 'year', year];
-  map.setFilter('guns_by_zip', filters);
+  map.setFilter('guns_cloro', filters);
   map.setFilter('mass_shootings-circles', filters);
 
   // Set the label to the month
