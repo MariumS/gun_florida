@@ -99,9 +99,9 @@ map.on('mousemove', function (e) {
         layers: ['guns_cloro']
     })
 
-    map.on('mousemove', function (e) {
+    map.on('mousemove', function (m) {
         // query for the features under the mouse, but only in the lots layer
-        var features = map.queryRenderedFeatures(e.point, {
+        var features = map.queryRenderedFeatures(m.point, {
             layers: ['mass_shootings-circles']
         })
 
@@ -116,20 +116,20 @@ map.on('mousemove', function (e) {
     });
 
     // Change the cursor to a pointer when the mouse is over the guns_ layer.
-    map.on('mouseenter', 'mass_shootings-circles', function(e) {
+    map.on('mouseenter', 'mass_shootings-circles', function(m) {
       map.getCanvas().style.cursor = 'pointer';
     });
 
     // Change it back to a pointer when it leaves.
-    map.on('mouseleave', 'mass_shootings-circles', function(e) {
+    map.on('mouseleave', 'mass_shootings-circles', function(m) {
       map.getCanvas().style.cursor = 'pointer';
     });
 
-  map.on('click', 'mass_shootings-circles', function(e) {
+  map.on('click', 'mass_shootings-circles', function(m) {
 
     new mapboxgl.Popup()
-      .setLngLat(e.lngLat)
-      .setHTML(`${e.n_killed} people were killed at ${e.address} on ${e.date}`)
+      .setLngLat(m.lngLat)
+      .setHTML(`${m.n_killed} people were killed at ${m.address} on ${m.date}`)
       .addTo(map);
   });
 
