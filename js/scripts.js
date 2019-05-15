@@ -94,13 +94,13 @@ filterBy(year);
 
 
 map.on('mousemove', function (e) {
-    // query for the features under the mouse, but only in the lots layer
+    // query for the features under the mouse, but only in the zips layer
     var features = map.queryRenderedFeatures(e.point, {
         layers: ['guns_cloro']
     })
 
     map.on('mousemove', function (m) {
-        // query for the features under the mouse, but only in the lots layer
+        // query for the features under the mouse, but only in the mass_shootings layer
         var features = map.queryRenderedFeatures(m.point, {
             layers: ['mass_shootings-circles']
         })
@@ -138,6 +138,8 @@ map.on('mousemove', function (e) {
       .setLngLat(e.lngLat)
       .setHTML(`${e.n_killed_t} people were killed in ${e.ZCTA5CE10} in ${e.year}`)
       .addTo(map);
+      console.log(`${e.n_killed_t} people were killed in ${e.ZCTA5CE10} in ${e.year}`);
+
   });
 
 });
