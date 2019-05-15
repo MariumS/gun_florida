@@ -67,16 +67,3 @@ map.on('mouseenter', 'guns_by_zip', function() {
 map.on('mouseleave', 'guns_by_zip', function() {
   map.getCanvas().style.cursor = 'pointer';
 });
-
-new mapboxgl.Marker({
-    color: 'blue',
-  })
-  .setLngLat([mass_shootings.longitude, mass_shootings.latitude])
-  .setPopup(new mapboxgl.Popup({
-      offset: 10
-    })
-    .setText(`${mass_shootings.address} year ${mass_shootings.year}`))
-  .addTo(map);
-
-  });
-});
