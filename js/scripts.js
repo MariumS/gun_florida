@@ -51,21 +51,6 @@ map.on('load', function() {
     data: './data/mass_shootings.geojson',
   });
 
-
-  mass_shootings.features = mass_shootings.features.map(function(e) {
-    e.properties.year = d;
-    return d;
-  });
-
-  guns_by_zip.features = guns_by_zip.features.map(function(e) {
-    d.properties.year = d;
-    return d;
-  });
-
-  document.getElementById('slider').addEventListener('input', function(e) {
-    var year = parseInt(e.year);
-    filterBy(year);
-
     map.addLayer({
       id: 'guns_cloro',
       type: 'fill',
@@ -109,6 +94,14 @@ map.on('load', function() {
     });
   });
 
+  // Set filter to first year
+  filterBy(2013);
+
+
+document.getElementById('slider').addEventListener('input', function(e) {
+var year = parseInt(e.target.value, 10);
+filterBy(year);
+
   map.on('click', 'mass_shootings-circles', function(e) {
     new mapboxgl.Popup()
       .setLngLat(e.lngLat)
@@ -133,13 +126,4 @@ map.on('load', function() {
     map.getCanvas().style.cursor = 'pointer';
   });
 
-  // Set filter to first year
-  filterBy(2013);
-
-
-document.getElementById('slider').addEventListener('input', function(e) {
-var year = parseInt(e.target.value, 10);
-filterBy(year);
-
 });
-  });
