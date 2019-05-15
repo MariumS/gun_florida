@@ -15,8 +15,8 @@ slider.oninput = function() {
 var map = new mapboxgl.Map({
   container: 'mapContainer',
   style: 'mapbox://styles/mapbox/outdoors-v11',
-  center: [-73.985130, 40.758896],
-  zoom: 6.5
+  center: [-81.7, 27.99],
+  zoom: 6,
 });
 
 map.addSource('guns_by_zip', {
@@ -31,19 +31,8 @@ map.addSource('mass_shootings', {
 });
 
 map.on('load', function(){
-
-  new mapboxgl.Marker({
-    color: 'blue',
-  })
-    .setLngLat([mass_shootings.longitude, mass_shootings.latitude])
-    .setPopup(new mapboxgl.Popup({ offset: 10 })
-    .setText(`In ${mass_shootings.address} year ${mass_shootings.year}`))
-    .addTo(map);
-  });
-
-
       map.addLayer({
-        id: 'guns_',
+        id: 'guns_fill_color',
         type: 'fill',
         source: 'guns_by_zip',
         paint: {
@@ -59,5 +48,13 @@ map.on('load', function(){
           'fill-opacity': 0.6
         },
         layout: {}
-  
+          });
+        new mapboxgl.Marker({
+          color: 'blue',
+        })
+          .setLngLat([mass_shootings.longitude, mass_shootings.latitude])
+          .setPopup(new mapboxgl.Popup({ offset: 10 })
+          .setText(`In ${mass_shootings.address} year ${mass_shootings.year}`))
+          .addTo(map);
+
       });
