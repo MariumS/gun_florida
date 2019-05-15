@@ -85,7 +85,7 @@ map.on('load', function() {
   });
 
   // Set filter to first year
-  filterBy(2013);
+  filterBy(2014);
 
 
 document.getElementById('slider').addEventListener('input', function(e) {
