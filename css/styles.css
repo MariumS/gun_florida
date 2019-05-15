@@ -1,29 +1,37 @@
-body {
-  height: 100%;
-  width: 100%;
-  margin: 0
-}
+
 
 #mapContainer {
-  position: absolute;
-  width: 200px;
-  height: 200px;
+  display: inline-block
+  width: 1000px;
+  height: 1000px;
+}
+
+.figure {
+  display: inline-block
+}
+
+.figure-img {
+  margin-bottom: .5rem;
+  line-height: 1
+}
+
+body {
+  background: grey;
 }
 
 .legend {
   background-color: #66ffcc;
   border-radius: 3px;
-  bottom: 30px;
+  bottom: 100px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.10);
-  font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font: 12px/10px 'Helvetica Neue', Arial, Helvetica, sans-serif;
   padding: 10px;
-  position: absolute;
-  right: 10px;
-  z-index: 1;
-}
+  position: fixed;
+  right: 30px;
+  width: 100px;
+  height: 100px;
 
-.legend h4 {
-  margin: 0 0 10px;
+  z-index: 1;
 }
 
 .legend div span {
@@ -33,24 +41,6 @@ body {
   margin-right: 5px;
   width: 10px;
 }
-
-
-.info {
-  background-color: #66ffcc;
-  border-radius: 3px;
-  bottom: 30px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.10);
-  font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-  padding: 10px;
-  position: absolute;
-  left: 10px;
-  z-index: 1;
-}
-
-.info div span {
-  border-radius: 50%;
-  display: inline-block;
-  height: 10px;
-  margin-right: 5px;
-  width: 10px;
+.cover {
+  padding: 0 1.5rem;
 }

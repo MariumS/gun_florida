@@ -1,13 +1,5 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoibWFyemlwYW45NCIsImEiOiJjanVrOTdwaDQxdG42NDRwNGFmbzY5dWdtIn0.4lVQxPc89QYzHas2IIWmew';
 
-var slider = document.getElementById("myRange");
-var output = document.getElementById("demo");
-//output.innerHTML = slider.value; // Display the default slider value
-
-// Update the current slider value (each time you drag the slider handle)
-//slider.oninput = function() {
-//output.innerHTML = this.value;
-//};
 
 var map = new mapboxgl.Map({
   container: 'mapContainer',
@@ -53,7 +45,7 @@ map.on('load', function() {
 map.on('click', 'guns_cloro', function(e) {
   new mapboxgl.Popup()
     .setLngLat(e.lngLat)
-    .setHTML(e.features[0].properties.n_killed_t)
+    .setText(`${e.n_killed_t} people were killed in ${e.ZCTA5CE10} in ${e.year}`)
     .addTo(map);
 });
 
