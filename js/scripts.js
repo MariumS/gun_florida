@@ -30,12 +30,12 @@ map.on('load', function() {
   });
 
   map.addLayer({
-    id: 'guns_by_zip',
+    id: 'guns_cloro',
     type: 'fill',
-    source: 'guns',
+    source: 'guns_by_zip',
     paint: {
       'fill-color': {
-        property: 'n_killed',
+        property: 'n_killed_t',
         stops: [
           [0, '#f7cdcd'],
           [5, '#ee9f9f'],
@@ -50,8 +50,7 @@ map.on('load', function() {
 });
 
 
-
-map.on('click', 'guns_by_zip', function(e) {
+map.on('click', 'guns_cloro', function(e) {
   new mapboxgl.Popup()
     .setLngLat(e.lngLat)
     .setHTML(e.features[0].properties.n_killed_t)
@@ -59,11 +58,11 @@ map.on('click', 'guns_by_zip', function(e) {
 });
 
 // Change the cursor to a pointer when the mouse is over the guns_ layer.
-map.on('mouseenter', 'guns_by_zip', function() {
+map.on('mouseenter', 'guns_cloro', function() {
   map.getCanvas().style.cursor = 'pointer';
 });
 
 // Change it back to a pointer when it leaves.
-map.on('mouseleave', 'guns_by_zip', function() {
+map.on('mouseleave', 'guns_cloro', function() {
   map.getCanvas().style.cursor = 'pointer';
 });
