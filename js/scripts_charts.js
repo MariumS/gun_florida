@@ -45,7 +45,7 @@ var colour_scale = d3.scaleQuantile()
 
 
 function update(year) {
-    d3.csv('monthly_data_' + year + '.csv', function(csv_data) {
+    d3.csv('zipcode_data_' + year + '.csv', function(csv_data) {
 
         var t = d3.transition()
             .duration(1500);
