@@ -88,7 +88,7 @@ function update(year) {
                 return y_scale(d.value);
             })
             .attr('height', function(d) {
-                return height - y_scale(d.value);
+                return height + y_scale(d.value);
             })
             .attr('fill', function(d) {
                 return colour_scale(d.value);
