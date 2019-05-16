@@ -1,23 +1,72 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="css/styles.css">
-    <script src="//d3js.org/d3.v4.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/d3-queue/3.0.4/d3-queue.min.js"></script>
-    <title>Charts</title>
-  </head>
+<html lang="en">
 
-    <body>
-        <form>
-            <label for="year">Please select a year: </label>
-            <input type="range" min=2014 max=2018 step=1 id="year" value=2014 oninput="selected_year.value = year.value">
-            <output name="selected_year" id="selected_year">2014</output>
-        </form>
-        <div id="vis">
-        </div>
-        <script src="js/scripts_charts.js"></script>
+<head>
+  <meta charset="utf-8">
+
+  <title>Gun Deaths Florida</title>
+  <meta name="description" content="Charts of Gun Deaths in Florida">
+  <meta name="author" content="Marium Sultan">
+  <link rel="icon" href="favicon.ico">
+
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!-- Mapbox CSS -->
+<link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css" rel="stylesheet" />
+<!-- Custom CSS -->
+<link rel="stylesheet" href="css/styles_cover.css">
 
 
-          </body>
-    </html>
+<body class="text-center">
+  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+<header class="masthead mb-auto">
+  <div class="inner">
+    <h3 class="masthead-brand">Charts</h3>
+    <nav class="nav nav-masthead justify-content-center">
+      <a class="nav-link active" href="index.html">Main Page</a>
+      <a class="nav-link" href="map.html">Map</a>
+      <a class="nav-link" href="background.html">Background</a>
+    </nav>
+  </div>
+</header>
+
+<body class="text-center">
+
+<h3>
+
+  Figure1
+    <br />
+  total deaths per year, across all zipcodes, for years we have full data.
+  <br />
+ We can see that there is no clear trend up or down in total deaths over these 4 years
+   <br />
+  <img src="images/deathsperyear.png" alt="3" height="600" width="600">
+  <br />
+  <br />
+  Figure2
+  <br />
+
+  We can see more deaths by population tend to happen in zipcodes in the middle income range
+    <br />
+    Points up the 0 axis of income can be disregarded as missing data
+    <br />
+
+  <img src="images/income_norm.png" alt="1" height="600" width="600">
+  <br />
+  Figure3
+  <br />
+
+  There is actually a slight downward trend, as also revealed in DBSCAN, between higher amounts
+  non-citizens by population and gun deaths by population.
+  <br />
+
+  <img src="images/killed_not_citizen.png" alt="2" height="600" width="600">
+    <br />
+
+
+
+</h3>
+
+
+
+
+    </body>

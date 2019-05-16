@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
 
-  <title>Gun Deaths NY State</title>
+  <title>Gun Deaths Florida</title>
   <meta name="description" content="Background of Gun Deaths in Florida">
   <meta name="author" content="Marium Sultan">
   <link rel="icon" href="favicon.ico">
@@ -13,15 +13,50 @@
 <!-- Mapbox CSS -->
 <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css" rel="stylesheet" />
 <!-- Custom CSS -->
-<link rel="stylesheet" href="css/styles_cover">
+<link rel="stylesheet" href="css/styles_cover.css">
+
+
+<body class="text-center">
+  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+<header class="masthead mb-auto">
+  <div class="inner">
+    <h3 class="masthead-brand">Background</h3>
+    <nav class="nav nav-masthead justify-content-center">
+      <a class="nav-link active" href="index.html">Main Page</a>
+      <a class="nav-link" href="map.html">Map</a>
+      <a class="nav-link" href="charts.html">Charts</a>
+    </nav>
+  </div>
+</header>
 
 <body class="text-center">
 
+<h3>
 
+  Based on a project by </br/>
+  Mark Bauer, </br/>
+  Zoe Martiniak, </br/>
+and Marium Sultan</br/>
+</br/>
   The gun violence dataset is from the  <a href = "https://www.gunviolencearchive.org">Gun Violence Archive (GVA)</a>
   a non-profit that provides free access to information about gun-related violence in the United States.
   We obtained this dataset from a <a href = "https://github.com/jamesqo/gun-violence-data">Github repository</a> posted by jamesqo.
   The gun violence dataset’s time period includes 2013 to 2018 with more than 260,000 incidents, and the data is aggregated by zip code.
 
+</br/>
+</br/>
+We are specifically looking into the state of Florida given its high gun ownership rate and high gun shooting rate. Florida has the third highest gun death count of all states and the 15th highest gun death rate when normalized by population. In the past couple years there have been numerous devastating gun massacres in Florida, including the shootings at the Orlando nightclub and Parkland High School.
+</br/>
+These are shown on the map in dots ranging from blue to black, depending on the amount of people killed.
 
+</br/>
+</br/>
+After attaching American Communtity Survey variables to the data and running various statistical tests, the most telling results came from DBSCAN
+
+<img src="images/dbscan.png" alt="db" height="150" width="600">
+</br/>
+Overall, cluster 1 contained exceedingly high values for many variables that researchers believe to be negatively correlated with gun deaths. This includes household income, percent having a bachelors degree or higher, married couple households, as shown below. And reciprocally, cluster 3 showed to have much lower values for those variables. An interesting finding was that clusters 0 and 1 had a very high percentage of not citizens, while cluster 3 had a very low percentage of not citizens. This indicates that areas where there are higher percentage of foreigners have lower gun death rates. This counters rhetoric that is commonly repeated in today’s politics related to border security.
+</br/>
+</br/>
+On the charts page you will find gun deaths by zipcode, normalized by population plotted against other demographic variables
 </body>

@@ -124,13 +124,26 @@ map.on('load', function() {
    // get the first feature from the array of returned features.
    var zip = features[0];
 
+   map.on('click', 'mass_shootings-circles', function(zip) {
+
+     new mapboxgl.Popup()
+       .setLngLat(zip.lngLat)
+       .setHTML(`${zip.properties.n_killed} people were killed at ${zip.properties.address} on ${zip.properties.date}`)
+       .addTo(map);
+   });
+
    if (zip) {  // if there's a zip under the mouse, do stuff
      map.getCanvas().style.cursor = 'pointer';  // make the cursor a pointer
 
      // use jquery to display the properties to the sidebar
-     $('#n_killed').text(zip.properties.n_killed_t);
-     $('#year').text(zip.properties.year);
-     $('#zipcode').text(zip.properties.ZCTA5CE10);
+     $('#n_killed').text(`${zip.properties.n_killed_t} people were killed by guns`);
+     $('#year').text(`in ${zip.properties.year}`);
+     $('#zipcode').text(`in zipcode ${zip.properties.ZCTA5CE10}`);
+
+
+            $('#n_killed_s').text(`${zip.properties.n_killed} people were killed in this mass shooting`);
+            $('#year_s').text(`on ${zip.properties.date}`);
+            $('#address_s').text(`at ${zip.properties.address}`);
 
      // set this lot's polygon feature as the data for the highlight source
      map.getSource('highlight-feature').setData(zip.geometry);
@@ -144,6 +157,8 @@ map.on('load', function() {
        features: []
   })
   }
+
+
 
       });
     });

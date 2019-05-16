@@ -14,6 +14,8 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <!-- Mapbox CSS -->
 <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css" rel="stylesheet" />
+<!-- FontAwesome CSS -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 <!-- Custom CSS -->
 <link rel="stylesheet" href="css/styles.css?v=1.0">
 
@@ -23,28 +25,39 @@
     <div id="sidebar">
       <div class="info-box">
         <h3>Florida Gun Deaths Map</h3>
-        <span id="address">Move the mouse over a zipcode for the total deaths that year</span><br/>
+        <span id=address> </span>Move the mouse over a zipcode for the total deaths that year <i class="fas fa-angle-right"></i> </span><br/>
         <span id="n_killed"></span><br/>
-        <span id="zipcode">o</span><br/>
+        <span id="zipcode"></span><br/>
         <span id="year"></span><br/>
       </div>
 
       <div class="info-box">
         <h3>Please select a year:</h3>
         <label id='year'></label>
-        <div>
-
       <div>
+
+
+          2014
             <input id='slider' type='range' min='2014' max='2018' step='1' value='2014' />
           2018
           </div>
-    </div>
+
 
         <hr/>
-        <button class="button"><a href = "charts.html"> Gun Death Changes Over Time</a> </button>
+        <button class="button"><a href = "charts.html"> Charts</a> </button>
+        <button class="button"><a href = "charts.html"> Background</a> </button>
+
+
 
       </div>
 
+      <div class="info-box">
+        <span id=address> </span>Dark dots indicate mass shootings (greater than or equal to 4 killed). <i class="fas fa-circle"></i> Click a mass shooting for more information</span><br/>
+        <span id="n_killed_s"></span><br/>
+        <span id="address_s"></span><br/>
+        <span id="year_s"></span><br/>
+
+      </div>
 
       <div class=legend >
 
@@ -59,7 +72,11 @@
       </div>
 
 
-    </div>
+
+
+
+
+
 
 
   <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
