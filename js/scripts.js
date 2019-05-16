@@ -127,13 +127,10 @@ map.on('load', function() {
    if (zip) {  // if there's a zip under the mouse, do stuff
      map.getCanvas().style.cursor = 'pointer';  // make the cursor a pointer
 
-     // lookup the corresponding description for the land use code
-     var n_killed = (parseInt(zip.properties.n_killed_t));
-
      // use jquery to display the address and land use description to the sidebar
      $('#n_killed').text(zip.properties.n_killed_t);
-     //$('#year').text(zip.properties.year);
-     //$('#n_killed').text(zip.properties.ZCTA5CE10);
+     $('#year').text(zip.properties.year);
+     $('#n_killed').text(zip.properties.ZCTA5CE10);
 
      // set this lot's polygon feature as the data for the highlight source
      map.getSource('highlight-feature').setData(zip.geometry);
