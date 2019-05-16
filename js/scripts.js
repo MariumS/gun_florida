@@ -137,7 +137,7 @@ map.on('load', function() {
            // if there's a zip under the mouse, do stuff
              map.getCanvas().style.cursor = 'pointer';  // make the cursor a pointer
 //if mass_shootings-circles
-             if (feature.layer.id === 'mass_shootings-circles') {
+             if (zip.layer.id === 'mass_shootings-circles') {
                {
 
                      // update the text for the mass shootings area
