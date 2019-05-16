@@ -44,16 +44,6 @@ html, body {
 }
 
 
-.info-box2 {
-  top: 25px;
-  left: 25px;
-  z-index: 10;
-  background-color: blue;
-  padding: 15px;
-  border-radius: 11px;
-  box-shadow: 1px 1px 7px #525252;
-  margin-bottom:15px
-}
 
 h3 {
   margin: 0 0 15px 0;
@@ -83,7 +73,20 @@ cursor: ew-resize;
 }
 
 .legend {
-  top: 30px;
+  top: 100px;
+  font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  float: left;
+  margin-right: 10px;
+  background-color: #c3c3c3;
+  padding: 15px;
+  border-radius: 11px;
+  box-shadow: 1px 1px 7px #525252;
+  margin-bottom:15px
+}
+
+
+.infobox2 {
+  top: 100px;
   font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
   float: left;
   margin-right: 10px;
