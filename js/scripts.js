@@ -93,56 +93,40 @@ map.on('load', function() {
 
 });
 
-map.on('mousemove', function (e) {
-    // query for the features under the mouse, but only in the zips layer
-    var features = map.queryRenderedFeatures(e.point, {
-        layers: ['guns_cloro']
-    })
 
-    map.on('mousemove', function (m) {
-        // query for the features under the mouse, but only in the mass_shootings layer
-        var features = map.queryRenderedFeatures(m.point, {
-            layers: ['mass_shootings-circles']
-        })
+// when the mouse moves, do stuff!
+ map.on('mousemove', function (e) {
+   // query for the features under the mouse, but only in the lots layer
+   var features = map.queryRenderedFeatures(e.point, {
+       layers: ['guns_cloro','mass_shootings-circles'],
+   });
 
-    // Change the cursor to a pointer when the mouse is over the guns_ layer.
-    map.on('mouseenter', 'guns_cloro', function(e) {
-      map.getCanvas().style.cursor = 'pointer';
-    });
+   // get the first feature from the array of returned features.
+   var zip = features[0]
 
-    // Change it back to a pointer when it leaves.
-    map.on('mouseleave', 'guns_cloro', function(e) {
-      map.getCanvas().style.cursor = 'pointer';
-    });
+   if (zip) {  // if there's a zip under the mouse, do stuff
+     map.getCanvas().style.cursor = 'pointer';  // make the cursor a pointer
 
-    // Change the cursor to a pointer when the mouse is over the guns_ layer.
-    map.on('mouseenter', 'mass_shootings-circles', function(m) {
-      map.getCanvas().style.cursor = 'pointer';
-    });
+     // lookup the corresponding description for the land use code
+     var n_killed = (parseInt(zip.properties.n_killed_t));
 
-    // Change it back to a pointer when it leaves.
-    map.on('mouseleave', 'mass_shootings-circles', function(m) {
-      map.getCanvas().style.cursor = 'pointer';
-    });
+     // use jquery to display the address and land use description to the sidebar
+     $('#year').text(zip.properties.year);
+     $('#n_killed').text(zip.properties.n_killed_t);
 
-  map.on('click', 'mass_shootings-circles', function(m) {
+     // set this lot's polygon feature as the data for the highlight source
+     map.getSource('highlight-feature').setData(zip.geometry);
+   } else {
+     map.getCanvas().style.cursor = 'default'; // make the cursor default
 
-    new mapboxgl.Popup()
-      .setLngLat(m.lngLat)
-      .setHTML(`${m.n_killed} people were killed at ${m.address} on ${m.date}`)
-      .addTo(map);
-  });
+     // reset the highlight source to an empty featurecollection
+     map.getSource('highlight-feature').setData({
+       type: 'FeatureCollection',
+       features: []
 
-  map.on('click', 'guns_cloro', function(e) {
-    new mapboxgl.Popup()
-      .setLngLat(e.lngLat)
-      .setHTML(`${e.n_killed_t} people were killed in ${e.ZCTA5CE10} in ${e.year}`)
-      .addTo(map);
-      console.log(`${e.n_killed_t} people were killed in ${e.ZCTA5CE10} in ${e.year}`);
+            })
+          }
+        });
 
-  });
 
-});
-
-});
-});
+   });
