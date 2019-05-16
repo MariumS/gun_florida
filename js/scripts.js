@@ -69,8 +69,8 @@ map.on('load', function() {
           'interpolate',
           ['linear'],
           ['get', 'n_killed'],
-          1, '#FCA107',
-          30, '#7F3121'
+          1, '#1400BA',
+          30, '#050201'
         ],
         'circle-opacity': 0.75,
         'circle-radius': [
@@ -137,17 +137,25 @@ map.on('load', function() {
 
      // set this lot's polygon feature as the data for the highlight source
      map.getSource('highlight-feature').setData(zip.geometry);
-   } else {
+   }
+   else {
      map.getCanvas().style.cursor = 'default'; // make the cursor default
 
      // reset the highlight source to an empty featurecollection
      map.getSource('highlight-feature').setData({
        type: 'FeatureCollection',
-       features: []
+       features: [] 
+  })
+  }
+     });
 
-            })
-          }
-        });
+       map.on('click', 'guns_cloro', function(e) {
+           new mapboxgl.Popup()
+             .setLngLat(e.lngLat)
+             .setHTML(`${e.n_killed_t} people were killed in ${e.ZCTA5CE10} in ${e.year}`)
+             .addTo(map);
+             console.log(`${e.n_killed_t} people were killed in ${e.ZCTA5CE10} in ${e.year}`);
 
+         });
 
-   });
+           });
