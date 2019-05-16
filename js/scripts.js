@@ -130,7 +130,7 @@ map.on('load', function() {
      // use jquery to display the properties to the sidebar
      $('#n_killed').text(zip.properties.n_killed_t);
      $('#year').text(zip.properties.year);
-     $('#n_killed').text(zip.properties.ZCTA5CE10);
+     $('#zipcode').text(zip.properties.ZCTA5CE10);
 
      // set this lot's polygon feature as the data for the highlight source
      map.getSource('highlight-feature').setData(zip.geometry);
@@ -145,15 +145,5 @@ map.on('load', function() {
   })
   }
 
-  map.on('click', 'guns_cloro', function (e) {
-  new mapboxgl.Popup()
-  .setLngLat(e.lngLat)
-  .setHTML(e.features[0].properties.n_killed_t)
-  .addTo(map);
-  });
-
       });
-
-
-
     });
