@@ -131,8 +131,9 @@ map.on('load', function() {
      var n_killed = (parseInt(zip.properties.n_killed_t));
 
      // use jquery to display the address and land use description to the sidebar
-     $('#year').text(zip.properties.year);
      $('#n_killed').text(zip.properties.n_killed_t);
+     $('#year').text(zip.properties.year);
+     $('#n_killed').text(zip.properties.ZCTA5CE10);
 
      // set this lot's polygon feature as the data for the highlight source
      map.getSource('highlight-feature').setData(zip.geometry);
