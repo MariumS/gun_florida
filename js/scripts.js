@@ -93,6 +93,26 @@ map.on('load', function() {
 
 });
 
+// add an empty data source, which we will use to highlight the lot the user is hovering over
+  map.addSource('highlight-feature', {
+    type: 'geojson',
+    data: {
+      type: 'FeatureCollection',
+      features: []
+    }
+  })
+
+  // add a layer for the highlighted lot
+  map.addLayer({
+    id: 'highlight-line',
+    type: 'line',
+    source: 'highlight-feature',
+    paint: {
+      'line-width': 3,
+      'line-opacity': 0.9,
+      'line-color': 'black',
+    }
+  });
 
 // when the mouse moves, do stuff!
  map.on('mousemove', function (e) {
