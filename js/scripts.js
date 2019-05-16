@@ -147,15 +147,15 @@ map.on('load', function() {
        features: []
   })
   }
+
+  map.on('click', 'guns_cloro', function(zip) {
+      new mapboxgl.Popup()
+        .setLngLat(zip.lngLat)
+        .setHTML(`${zip.n_killed_t} people were killed in ${zip.ZCTA5CE10} in ${zip.year}`)
+        .addTo(map);
+        console.log(`${zip.n_killed_t} people were killed in ${zip.ZCTA5CE10} in ${zip.year}`);
+
      });
 
-       map.on('click', 'guns_cloro', function(e) {
-           new mapboxgl.Popup()
-             .setLngLat(e.lngLat)
-             .setHTML(`${e.n_killed_t} people were killed in ${e.ZCTA5CE10} in ${e.year}`)
-             .addTo(map);
-             console.log(`${e.n_killed_t} people were killed in ${e.ZCTA5CE10} in ${e.year}`);
-
-         });
-
-           });
+       });
+   });
