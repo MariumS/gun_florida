@@ -3,9 +3,9 @@ mapboxgl.accessToken = 'pk.eyJ1IjoibWFyemlwYW45NCIsImEiOiJjanVrOTdwaDQxdG42NDRwN
 
 var map = new mapboxgl.Map({
   container: 'mapContainer',
-  style: 'mapbox://styles/mapbox/outdoors-v11',
+  style: 'mapbox://styles/mapbox/dark-v10',
   center: [-81.7, 27.99],
-  zoom: 6,
+  zoom: 5.5,
 });
 
 var years = [
