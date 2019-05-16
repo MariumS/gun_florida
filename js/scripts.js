@@ -145,7 +145,7 @@ map.on('load', function() {
   })
   }
 
-  map.on('click', 'guns_by_zip', function (e) {
+  map.on('click', 'guns_cloro', function (e) {
   new mapboxgl.Popup()
   .setLngLat(e.lngLat)
   .setHTML(e.features[0].properties.n_killed_t)
