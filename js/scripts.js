@@ -137,7 +137,7 @@ map.on('load', function() {
            // if there's a zip under the mouse, do stuff
              map.getCanvas().style.cursor = 'pointer';  // make the cursor a pointer
 
-             if (feature.layer.id === 'massshootings') {
+             if (feature.layer.id === 'massshootings-circles') {
                {
                  // set this lot's polygon feature as the data for the highlight source
                  map.getSource('highlight-feature').setData(zip.geometry);
