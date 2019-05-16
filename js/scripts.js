@@ -8,6 +8,7 @@ var map = new mapboxgl.Map({
   //florida center
   center: [-81.7, 27.99],
   scrollWheelZoom: false,
+  scrollZoom: false,
   zoom: 5.5,
 });
 
