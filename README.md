@@ -9,13 +9,13 @@ The charts page provides supplemental charts to further highlight the data
 <br />
 
 
-Based on a project by </br/>
-Mark Bauer, </br/>
-Zoe Martiniak, </br/>
-and Marium Sultan</br/>
+Based on a project by <br/>
+Mark Bauer, <br/>
+Zoe Martiniak, <br/>
+and Marium Sultan<br/>
 For Large Scale Data Analysis Part 2
-</br/>
-Related Project:
+<br/>
+
 
 <br />
 Templates:
