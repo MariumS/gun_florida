@@ -7,6 +7,14 @@ html, body {
   margin:0
 }
 
+.chart{
+    height: 100px;
+    width: 100px;
+    background: lightgray;
+    margin: 0 auto;
+  }
+
+
 #mapContainer {
   height: 100%;
   width: 100%;
@@ -96,4 +104,23 @@ cursor: ew-resize;
   height: 10px;
   margin-right: 5px;
   width: 10px;
+}
+
+
+
+.rectangle {
+	fill: steelblue;
+}
+.rectangle:hover {
+	fill: orange;
+}
+.axis {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
 }
