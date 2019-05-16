@@ -136,24 +136,27 @@ map.on('load', function() {
          if (zip) {
            // if there's a zip under the mouse, do stuff
              map.getCanvas().style.cursor = 'pointer';  // make the cursor a pointer
-
+//if mass_shootings-circles
              if (feature.layer.id === 'mass_shootings-circles') {
                {
-                 // set this lot's polygon feature as the data for the highlight source
-                 map.getSource('highlight-feature').setData(zip.geometry);
 
-                 // reset the highlight source to an empty featurecollection
-                 // clear the text for the zipcode area
-                 map.getSource('highlight-feature').setData({
-                     type: 'FeatureCollection',
-                     features: []
-             })
                      // update the text for the mass shootings area
                      $('#n_killed_s').text(`${zip.properties.n_killed} people were killed in this mass shooting`);
                      $('#year_s').text(`on ${zip.properties.date}`);
                      $('#address_s').text(`at ${zip.properties.address}`);
                    }
+
+                   // set this lot's polygon feature as the data for the highlight source
+                   map.getSource('highlight-feature').setData(zip.geometry);
+
+                   // reset the highlight source to an empty featurecollection
+                   // clear the text for the zipcode area
+                   map.getSource('highlight-feature').setData({
+                       type: 'FeatureCollection',
+                       features: []
+               })
              }
+             //else, zipcode layer
                  else {
                      //properties for zipcode layer
                      $('#n_killed').text(`${zip.properties.n_killed_t} people were killed by guns`);
