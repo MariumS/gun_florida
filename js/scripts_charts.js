@@ -51,12 +51,12 @@ function update(year) {
             .duration(1500);
 
         var zips = csv_data.map(function(d) {
-            return d.zipcode;
+            return d.ZCTA5CE10;
         });
         x_scale.domain(zips);
 
         var max_value = d3.max(csv_data, function(d) {
-            return d.value;
+            return d.n_killed;
         });
         y_scale.domain([0, max_value]);
         colour_scale.domain([0, max_value]);
@@ -82,16 +82,16 @@ function update(year) {
         new_bars.merge(bars)
             .transition(t)
             .attr('x', function(d) {
-                return x_scale(d.zipcode);
+                return x_scale(d.ZCTA5CE10);
             })
             .attr('y', function(d) {
-                return y_scale(d.value);
+                return y_scale(d.n_killed);
             })
             .attr('height', function(d) {
-                return height + y_scale(d.value);
+                return height - y_scale(d.n_killed);
             })
             .attr('fill', function(d) {
-                return colour_scale(d.value);
+                return colour_scale(d.n_killed);
             });
 
         svg.select('.x.axis')
@@ -107,8 +107,8 @@ function update(year) {
 
 var select = d3.select('#year');
 select.on('change', function() {
-    console.log(this.value);
-    update(this.value);
+    console.log(this.n_killed);
+    update(this.year);
 })
 
 update('2014');
