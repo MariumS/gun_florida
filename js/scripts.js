@@ -127,7 +127,7 @@ map.on('load', function() {
    if (zip) {  // if there's a zip under the mouse, do stuff
      map.getCanvas().style.cursor = 'pointer';  // make the cursor a pointer
 
-     // use jquery to display the address and land use description to the sidebar
+     // use jquery to display the properties to the sidebar
      $('#n_killed').text(zip.properties.n_killed_t);
      $('#year').text(zip.properties.year);
      $('#n_killed').text(zip.properties.ZCTA5CE10);
@@ -145,14 +145,6 @@ map.on('load', function() {
   })
   }
 
-  map.on('click', 'guns_cloro', function(zip) {
-      new mapboxgl.Popup()
-        .setLngLat(zip.lngLat)
-        .setHTML(`${zip.n_killed_t} people were killed in ${zip.ZCTA5CE10} in ${zip.year}`)
-        .addTo(map);
-        console.log(`${zip.n_killed_t} people were killed in ${zip.ZCTA5CE10} in ${zip.year}`);
 
-     });
-
-       });
-   });
+      });
+    });
