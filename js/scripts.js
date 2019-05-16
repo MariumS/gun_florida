@@ -1,13 +1,18 @@
+
+//personal access token, do not steal
 mapboxgl.accessToken = 'pk.eyJ1IjoibWFyemlwYW45NCIsImEiOiJjanVrOTdwaDQxdG42NDRwNGFmbzY5dWdtIn0.4lVQxPc89QYzHas2IIWmew';
 
-
+//create mapboxgl map, in the map container specified in css
 var map = new mapboxgl.Map({
   container: 'mapContainer',
   style: 'mapbox://styles/mapbox/dark-v10',
+  //florida center
   center: [-81.7, 27.99],
   zoom: 5.5,
 });
 
+//the relevant years
+//data for 2018 is incomplete
 var years = [
   '2014',
   '2015',
@@ -18,29 +23,30 @@ var years = [
 
 
 function filterBy(year) {
-
+//filtering our 2 layers by the year chosen by user through the slider
   var filters = ['==', 'year', year];
   map.setFilter('guns_cloro', filters);
   map.setFilter('mass_shootings-circles', filters);
 
-  // Set the label to the month
+  // Set the label to the year
   document.getElementById('year').textContent = years[year];
 
 }
 
 map.on('load', function() {
-
+//adding source for cloropleth. gun deaths data by zipcode by year
   map.addSource('guns_by_zip', {
     type: 'geojson',
     data: './data/simple_guns.geojson',
   });
 
-
+//adding source for mass shooting points. individual gun incident data, filtered to where n_killed is greater than 4
   map.addSource('mass_shootings', {
     type: 'geojson',
     data: './data/mass_shootings.geojson',
   });
 
+//creating cloropleth
     map.addLayer({
       id: 'guns_cloro',
       type: 'fill',
@@ -48,6 +54,7 @@ map.on('load', function() {
       paint: {
         'fill-color': {
           property: 'n_killed_t',
+          //color gets more red as number killed increases
           stops: [
             [0, '#f7cdcd'],
             [5, '#ee9f9f'],
@@ -60,6 +67,7 @@ map.on('load', function() {
       }
     });
 
+//creating points for mass shootings to overlay on map
     map.addLayer({
       'id': 'mass_shootings-circles',
       'type': 'circle',
@@ -69,31 +77,28 @@ map.on('load', function() {
           'interpolate',
           ['linear'],
           ['get', 'n_killed'],
+          //dots get slightly darker as number killed increases
           1, '#1400BA',
           30, '#050201'
         ],
         'circle-opacity': 0.75,
-        'circle-radius': [
-          'interpolate',
-          ['linear'],
-          ['get', 'n_killed'],
-          6, 4,
-          30, 4,
-        ]
+        'circle-radius': 4
       }
     });
 
   // Set filter to first year
   filterBy(2014);
 
-
+//getting year from slider
   document.getElementById('slider').addEventListener('input', function(e) {
   var year = parseInt(e.target.value, 10);
+  //filtering by year
   filterBy(year);
 
 });
 
-// add an empty data source, which we will use to highlight the lot the user is hovering over
+// add an empty data source, which we will use to highlight the zipcode the user is hovering over
+
   map.addSource('highlight-feature', {
     type: 'geojson',
     data: {
@@ -102,7 +107,7 @@ map.on('load', function() {
     }
   })
 
-  // add a layer for the highlighted lot
+  // add a layer for the highlighted zipcode
   map.addLayer({
     id: 'highlight-line',
     type: 'line',
@@ -116,34 +121,29 @@ map.on('load', function() {
 
 // when the mouse moves, do stuff!
  map.on('mousemove', function (e) {
-   // query for the features under the mouse, but only in the lots layer
+   // query for the features under the mouse, on both layers
    var features = map.queryRenderedFeatures(e.point, {
        layers: ['guns_cloro','mass_shootings-circles'],
    });
 
    // get the first feature from the array of returned features.
    var zip = features[0];
+   console.log(zip);
 
-   map.on('click', 'mass_shootings-circles', function(zip) {
-
-     new mapboxgl.Popup()
-       .setLngLat(zip.lngLat)
-       .setHTML(`${zip.properties.n_killed} people were killed at ${zip.properties.address} on ${zip.properties.date}`)
-       .addTo(map);
-   });
 
    if (zip) {  // if there's a zip under the mouse, do stuff
      map.getCanvas().style.cursor = 'pointer';  // make the cursor a pointer
 
      // use jquery to display the properties to the sidebar
-     $('#n_killed').text(`${zip.properties.n_killed_t} people were killed by guns`);
-     $('#year').text(`in ${zip.properties.year}`);
-     $('#zipcode').text(`in zipcode ${zip.properties.ZCTA5CE10}`);
+     //properties for zipcode layer
+    $('#n_killed').text(`${zip.properties.n_killed_t} people were killed by guns`);
+    $('#year').text(`in ${zip.properties.year}`);
+    $('#zipcode').text(`in zipcode ${zip.properties.ZCTA5CE10}`);
 
-
-            $('#n_killed_s').text(`${zip.properties.n_killed} people were killed in this mass shooting`);
-            $('#year_s').text(`on ${zip.properties.date}`);
-            $('#address_s').text(`at ${zip.properties.address}`);
+//properties for mass shooting layer
+    $('#n_killed_s').text(`${zip.properties.n_killed} people were killed in this mass shooting`);
+    $('#year_s').text(`on ${zip.properties.date}`);
+    $('#address_s').text(`at ${zip.properties.address}`);
 
      // set this lot's polygon feature as the data for the highlight source
      map.getSource('highlight-feature').setData(zip.geometry);
