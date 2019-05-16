@@ -122,7 +122,7 @@ map.on('load', function() {
    });
 
    // get the first feature from the array of returned features.
-   var zip = features[0]
+   var zip = features[0];
 
    if (zip) {  // if there's a zip under the mouse, do stuff
      map.getCanvas().style.cursor = 'pointer';  // make the cursor a pointer
@@ -132,8 +132,8 @@ map.on('load', function() {
 
      // use jquery to display the address and land use description to the sidebar
      $('#n_killed').text(zip.properties.n_killed_t);
-     $('#year').text(zip.properties.year);
-     $('#n_killed').text(zip.properties.ZCTA5CE10);
+     //$('#year').text(zip.properties.year);
+     //$('#n_killed').text(zip.properties.ZCTA5CE10);
 
      // set this lot's polygon feature as the data for the highlight source
      map.getSource('highlight-feature').setData(zip.geometry);
@@ -144,7 +144,7 @@ map.on('load', function() {
      // reset the highlight source to an empty featurecollection
      map.getSource('highlight-feature').setData({
        type: 'FeatureCollection',
-       features: [] 
+       features: []
   })
   }
      });
