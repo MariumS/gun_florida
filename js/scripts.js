@@ -13,6 +13,8 @@ var map = new mapboxgl.Map({
 
 //the relevant years
 //data for 2018 is incomplete
+//data for 2013 is so patchy it is left out
+//the original data also has 1970 but all gun death counts seem to be 0
 var years = [
   '2014',
   '2015',
